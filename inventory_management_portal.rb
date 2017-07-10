@@ -69,7 +69,7 @@ end
 
 def import_csv(file_name)
   begin
-    card_info = File.read(file_name).split(/\r\n/)
+    card_info = File.read(file_name).split(/\n/)
 
     card_info.each do |card|
       card = card.split(",")
