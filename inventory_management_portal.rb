@@ -82,3 +82,23 @@ def import_csv(file_name)
     puts "There was a problem loading the file."
   end
 end
+
+def display_menu
+  puts "\t1 - Import a CSV file into inventory."
+  puts "\t2 - Add card(s) to the inventory."
+  puts "\t3 - Update the price of a card."
+  puts "\t4 - Remove card(s) from innventory."
+  puts "\tq - Exit."
+end
+
+def valid_digit?(digit)
+  digit == digit.to_i.to_s || digit.to_f.to_s == digit || digit.to_f.real?
+end
+
+def enter_valid_digit(valid_digit=0)
+  until valid_digit?(valid_digit)
+    valid_digit = gets.chomp
+    puts "Enter a valid digit" if valid_digit?(valid_digit) == false
+  end
+  valid_digit
+end
