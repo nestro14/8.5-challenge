@@ -102,3 +102,86 @@ def enter_valid_digit(valid_digit=0)
   end
   valid_digit
 end
+
+## DRIVER CODE ##
+create_database(card_schema)
+
+puts "=> Welcome to the Inventory Management Portal"
+puts "=> Please choose from the options below.\n"
+option = nil
+
+loop do
+  display_menu
+
+  option = gets.chomp
+  break if option.downcase.start_with?('q')
+
+  case option
+  when '1'
+    puts "Please enter the name of the csv file along with its extension:"
+    fname = gets.chomp
+    until `find #{fname}`.chomp == fname
+      puts "Try again or type m to return to the main menu."
+      fname = gets.chomp
+      break if fname.downcase.start_with?('m')
+    end
+    import_csv(fname)
+  when '2'
+    card = []
+    puts "Card Name:"
+    card << gets.chomp
+    puts "Card Edition:"
+    card << enter_valid_digit(gets.chomp).to_i
+    puts "Card Color:"
+    card << gets.chomp
+    puts "Card Type:"
+    card << gets.chomp
+    puts "Is the card a Foil? Enter 1 for yes and 0 for no:"
+    card << enter_valid_digit(gets.chomp).to_i
+    puts "Card Price:"
+    card << enter_valid_digit(gets.chomp).to_f
+    puts "How many of this card would you like to add to inventory?"
+    card << enter_valid_digit(gets.chomp).to_i
+    insert_card_into_inventory(card)
+  when '3'
+    puts "What is the name of the card you wish to update?"
+    card = []
+    puts "Card Name:"
+    card << gets.chomp
+    puts "Card Edition:"
+    card << enter_valid_digit(gets.chomp).to_i
+    puts "Card Color:"
+    card << gets.chomp
+    puts "Card Type:"
+    card << gets.chomp
+    puts "Is the card a Foil? Enter 1 for yes and 0 for no:"
+    card << enter_valid_digit(gets.chomp).to_i
+    puts "Card Price:"
+    card << enter_valid_digit(gets.chomp).to_f
+    update_card_price(card)
+    # puts "If the card's price did not update you entered in the wrong info or the card is not in inventory."
+  when '4'
+    puts "What is the name of the card you wish to remove/update?"
+    card = []
+    puts "Card Name:"
+    card << gets.chomp
+    puts "Card Edition:"
+    card << enter_valid_digit(gets.chomp).to_i
+    puts "Card Color:"
+    card << gets.chomp
+    puts "Card Type:"
+    card << gets.chomp
+    puts "Is the card a Foil? Enter 1 for yes and 0 for no:"
+    card << enter_valid_digit(gets.chomp).to_i
+    puts "Card Price:"
+    card << enter_valid_digit(gets.chomp).to_f
+    puts "How many of this card would you like to remove from inventory?"
+    card << enter_valid_digit(gets.chomp).to_i
+    remove_card_from_inventory(card)
+    puts "If the card's qty did not update you entered in the wrong info or the card is not in inventory."
+  else
+    puts "#{option} is not a valid choose, please try again."
+  end
+end
+
+puts "Thank you for using the Inventory Portal, Good bye!"
