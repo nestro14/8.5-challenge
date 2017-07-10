@@ -12,5 +12,14 @@ This program will initally create his database with the first file imported and 
 
 # Psuedocode #
 ---
+1. Create database for card inventory
+2. Create Schema for database
+3. Create insert, update and remove methods for a card
+4. Create a method to import csv file of cards
+    1. Read/load CSV file and put data into an array
+    2. Iterate through data and collect each individual card
+    3. Insert each card into database
+5. Create Driver code for 4 different option to either insert a card, remove a card, upadate the price of a card, and import a CSV file into the inventory.
 
+This Psuedocode is very simple but outlines the general direction of the driver code and methods.
 
