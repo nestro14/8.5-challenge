@@ -66,3 +66,19 @@ def remove_card_from_inventory(card)
     AND foil = #{card[4].to_i}
     AND qty - #{card[6].to_i} >= 1;")
 end
+
+def import_csv(file_name)
+  begin
+    card_info = File.read(file_name).split(/\r\n/)
+
+    card_info.each do |card|
+      card = card.split(",")
+      insert_card_into_inventory(card)
+    end
+
+    puts "The file #{file_name} was loaded succesfully."
+  rescue Exception => e
+    puts e.message
+    puts "There was a problem loading the file."
+  end
+end
